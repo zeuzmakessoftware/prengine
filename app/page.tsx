@@ -67,7 +67,7 @@ export default function LandingPage() {
       })
     }, 4000)
     return () => clearInterval(interval)
-  }, [])
+  }, [controls, features.length])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-neutral-950 via-black to-neutral-900">

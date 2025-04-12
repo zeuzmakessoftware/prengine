@@ -4,7 +4,7 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion'
+import { motion } from 'framer-motion'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 import { Navbar } from '@/components/Nav'
@@ -30,7 +30,6 @@ export default function BlogPage({ params }: Props) {
   const [blogData, setBlogData] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
-  const controls = useAnimation()
 
   useEffect(() => {
     if (!slug) return
@@ -197,43 +196,43 @@ export default function BlogPage({ params }: Props) {
             <ReactMarkdown
               remarkPlugins={[remarkGfm]}
               components={{
-                h1: ({ node, ...props }) => <h1 className="text-4xl font-bold my-8 text-white" {...props} />,
-                h2: ({ node, ...props }) => <h2 className="text-3xl font-bold my-6 text-white" {...props} />,
-                h3: ({ node, ...props }) => <h3 className="text-2xl font-bold my-5 text-white" {...props} />,
-                h4: ({ node, ...props }) => <h4 className="text-xl font-bold my-4 text-white" {...props} />,
-                p: ({ node, ...props }) => <p className="my-4 text-white/80" {...props} />,
-                ul: ({ node, ...props }) => <ul className="list-disc pl-6 my-4" {...props} />,
-                ol: ({ node, ...props }) => <ol className="list-decimal pl-6 my-4" {...props} />,
-                li: ({ node, ...props }) => <li className="my-2 text-white/80" {...props} />,
-                blockquote: ({ node, ...props }) => (
+                h1: ({ ...props }) => <h1 className="text-4xl font-bold my-8 text-white" {...props} />,
+                h2: ({ ...props }) => <h2 className="text-3xl font-bold my-6 text-white" {...props} />,
+                h3: ({ ...props }) => <h3 className="text-2xl font-bold my-5 text-white" {...props} />,
+                h4: ({ ...props }) => <h4 className="text-xl font-bold my-4 text-white" {...props} />,
+                p: ({ ...props }) => <p className="my-4 text-white/80" {...props} />,
+                ul: ({ ...props }) => <ul className="list-disc pl-6 my-4" {...props} />,
+                ol: ({ ...props }) => <ol className="list-decimal pl-6 my-4" {...props} />,
+                li: ({ ...props }) => <li className="my-2 text-white/80" {...props} />,
+                blockquote: ({ ...props }) => (
                   <blockquote className="border-l-4 border-neutral-600 pl-4 italic my-6" {...props} />
                 ),
-                code: ({ node, ...props }) => (
+                code: ({ ...props }) => (
                   <code
                     className={`bg-white/10 p-1 rounded text-sm font-mono`}
                     {...props}
                   />
                 ),
-                pre: ({ node, ...props }) => (
+                pre: ({ ...props }) => (
                   <pre
                     className={`bg-white/10 p-4 rounded-xl my-4 overflow-x-auto`}
                     {...props}
                   />
                 ),
-                a: ({ node, ...props }) => (
+                a: ({ ...props }) => (
                   <a className="text-neutral-400 hover:text-white transition-colors underline underline-offset-4" {...props} />
                 ),
-                table: ({ node, ...props }) => (
+                table: ({ ...props }) => (
                   <table className="border-collapse border border-white/20 my-6 w-full" {...props} />
                 ),
-                th: ({ node, ...props }) => (
+                th: ({ ...props }) => (
                   <th className="border border-white/20 px-4 py-2 bg-white/10 font-bold text-left" {...props} />
                 ),
-                td: ({ node, ...props }) => (
+                td: ({ ...props }) => (
                   <td className="border border-white/20 px-4 py-2 text-white/80" {...props} />
                 ),
-                img: ({ node, ...props }) => (
-                  <img className="max-w-full h-auto my-6 rounded-lg border border-white/10" {...props} />
+                img: ({ src, ...props }) => (
+                  <img className="max-w-full h-auto my-6 rounded-lg border border-white/10" src={src} alt={props.alt || "Blog post image"} {...props} />
                 ),
               }}
             >
